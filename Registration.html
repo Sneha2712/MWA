@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Registration Form</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <style>
+    .register-btn:hover {
+      background-color: #eac182;
+      color: red;
+      border: 2px solid #f9bf67;
+    }
+
+    .register-btn{
+      background-color: #f2d9b5;
+      color: rgb(254, 75, 75);
+      border: 2px solid black;
+      padding: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Registration Form</h1>
+    <form id="registration-form" class="registration-form" method="POST" onsubmit="return add_csv()" >
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="club">Club:</label>
+        <select id="club" name="club" required>
+          <option value="">Select a club</option>
+          <option value="Cipher">Team CiPHER</option>
+          <option value="CC">Coding Club</option>
+          Add more options for each club
+        </select>
+      </div>
+      <div class="form-group">
+        <!-- <a class="register-btn" href="club.html" onclick="add_csv()">Register</a> -->
+        <a href="club.html"><input type="submit" value="Register" onclick="return add_csv()"></a>
+      </div>
+    </form>
+  </div>
+  <!-- <script src="club1.js"></script> -->
+
+  <script>
+    var data = [];
+    
+    function add_csv(form){
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var club = "club 1";
+
+      var info = [name, email, club];
+      data.append(info);
+
+      return false;
+    }
+     
+    function download_csv() {
+        var csv = 'Name,Title\n';
+        data.forEach(function(row) {
+                csv += row.join(',');
+                csv += "\n";
+        });
+     
+        console.log(csv);
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'people.csv';
+        hiddenElement.click();
+    }
+    </script>
+    
+</body>
+</html>
